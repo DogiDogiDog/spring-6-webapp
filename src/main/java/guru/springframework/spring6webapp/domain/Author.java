@@ -11,18 +11,22 @@ import java.util.Set;
 @Entity
 public class Author {
 
-
-    public Set<Book> getBooks() {
-        return books;
-    }
-
-    @ManyToMany(mappedBy = "authors")
-    private Set<Book> books = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String firstName;
     private String lastName;
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books = new HashSet<>();
+
+    public Set<Book> getBooks() {
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
     public Long getId() {
         return id;
@@ -51,17 +55,19 @@ public class Author {
     @Override
     public String toString() {
         return "Author{" +
-                "books=" + books +
-                ", id=" + id +
+                "id=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
+                ", books=" + books +
                 '}';
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Author author)) return false;
+        if (!(o instanceof Author)) return false;
+
+        Author author = (Author) o;
 
         return getId() != null ? getId().equals(author.getId()) : author.getId() == null;
     }
@@ -71,3 +77,14 @@ public class Author {
         return getId() != null ? getId().hashCode() : 0;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
