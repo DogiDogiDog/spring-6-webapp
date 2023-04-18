@@ -1,15 +1,19 @@
 package guru.springframework.spring6webapp.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 /**
  * Created by jt, Spring Framework Guru.
  */
 @Entity
 public class Book {
+
+
+    @ManyToMany
+    @JoinTable(name="author_books", joinColumns =  @JoinColumn(name="book_id"), inverseJoinColumns = @JoinColumn(name="author_id"))
+    private Set<Author> authors;
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

@@ -1,9 +1,8 @@
 package guru.springframework.spring6webapp.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.Set;
 
 /**
  * Created by jt, Spring Framework Guru.
@@ -11,6 +10,9 @@ import jakarta.persistence.Id;
 @Entity
 public class Author {
 
+
+    @ManyToMany(mappedBy = "authors")
+    private Set<Book> books;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
